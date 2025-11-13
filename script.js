@@ -60,7 +60,7 @@ const products = [
         emoji: "🏃",
         colors: ["Black"],
         sizes: ["3", "4", "5", "6", "7", "8", "9", "10"],
-        images: ["images/airmaxPlus.jpg"]
+        images: ["images/airmaxPLus.jpg"]
     },
     {
         id: 5,
