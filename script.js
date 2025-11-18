@@ -1,5 +1,4 @@
 // Product Database
-// Products now have color-specific images in a colorImages object
 const products = [
     {
         id: 1,
@@ -20,7 +19,7 @@ const products = [
     {
         id: 2,
         name: "New Balance 530",
-        category: "New-balance",
+        category: "New-Balance",
         price: 2200.00,
         salePrice: 1580.00,
         onSale: true,
@@ -60,12 +59,12 @@ const products = [
         emoji: "🏃",
         colors: ["Black"],
         sizes: ["3", "4", "5", "6", "7", "8", "9", "10"],
-        images: ["images/airmaxPLus.jpg"]
+        images: ["images/airmaxPlus.jpg"]
     },
     {
         id: 5,
         name: "Air Jordan 4 Retro",
-        category: "Air-jordan",
+        category: "Air-Jordan",
         price: 1500.00,
         onSale: false,
         emoji: "👟",
@@ -99,7 +98,7 @@ const products = [
     {
         id: 8,
         name: "Air Jordan 1",
-        category: "Air-jordan",
+        category: "Air-Jordan",
         price: 899.00,
         onSale: false,
         emoji: "👟",
@@ -110,7 +109,7 @@ const products = [
     {
         id: 9,
         name: "Air Jordan 4 [White Thunder]",
-        category: "Air-jordan",
+        category: "Air-Jordan",
         price: 2000.00,
         salePrice: 1600.00,
         onSale: true,
@@ -121,12 +120,12 @@ const products = [
     }
 ];
 
-// Cart data - stored in localStorage for persistence
+// Cart data
 let cart = [];
 
-// Load cart from localStorage
+// Load cart from sessionStorage
 function loadCart() {
-    const savedCart = localStorage.getItem('houseOfKryoCart');
+    const savedCart = sessionStorage.getItem('houseOfKryoCart');
     if (savedCart) {
         cart = JSON.parse(savedCart);
     } else {
@@ -134,16 +133,15 @@ function loadCart() {
     }
 }
 
-// Save cart to localStorage
+// Save cart to sessionStorage
 function saveCart() {
-    localStorage.setItem('houseOfKryoCart', JSON.stringify(cart));
+    sessionStorage.setItem('houseOfKryoCart', JSON.stringify(cart));
     updateCartCount();
 }
 
-// Helper function to render product image (with image carousel support)
+// Helper function to render product image
 function renderProductImage(product, size = 'default') {
     if (product.images && product.images.length > 0) {
-        // Use first image as main display
         return `<img src="${product.images[0]}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover;">`;
     }
     return `<span>${product.emoji || '👟'}</span>`;
@@ -151,7 +149,6 @@ function renderProductImage(product, size = 'default') {
 
 // Helper function to render image carousel for modal
 function renderImageCarousel(product) {
-    // Get the first color's image as default
     const defaultColor = product.colors[0];
     const defaultImage = product.colorImages && product.colorImages[defaultColor] 
         ? product.colorImages[defaultColor] 
@@ -208,12 +205,12 @@ function displaySalesProducts() {
 // Helper function to get display name for category
 function getCategoryDisplay(category) {
     const categoryMap = {
-        'nike': 'Nike',
-        'adidas': 'Adidas',
-        'air-jordan': 'Air Jordan',
-        'new-balance': 'New Balance',
-        'puma': 'Puma',
-        'others': 'Others'
+        'Nike': 'Nike',
+        'Adidas': 'Adidas',
+        'Air-Jordan': 'Air Jordan',
+        'New-Balance': 'New Balance',
+        'Puma': 'Puma',
+        'Others': 'Others'
     };
     return categoryMap[category] || category;
 }
@@ -302,7 +299,6 @@ function showProductModal(productId) {
     document.body.appendChild(modal);
     document.body.style.overflow = 'hidden';
 
-    // Add click handlers for size buttons
     setTimeout(() => {
         document.querySelectorAll('.size-btn').forEach(btn => {
             btn.addEventListener('click', function() {
@@ -312,14 +308,12 @@ function showProductModal(productId) {
             });
         });
 
-        // Add click handlers for color buttons
         document.querySelectorAll('.color-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
                 this.classList.add('selected');
                 document.getElementById('color-error').style.display = 'none';
                 
-                // Change the image when color is selected
                 const selectedColor = this.dataset.color;
                 changeImageByColor(productId, selectedColor);
             });
@@ -362,7 +356,6 @@ function addToCartWithOptions(productId) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
     
-    // Check if this exact combination already exists in cart
     const existingItem = cart.find(item => 
         item.id === productId && 
         item.size === selectedSize && 
@@ -400,11 +393,6 @@ function setupFilters() {
             displayProducts(btn.dataset.filter);
         });
     });
-}
-
-// Legacy function for backward compatibility (redirects to modal)
-function addToCart(productId) {
-    showProductModal(productId);
 }
 
 // Update cart count in navbar
@@ -497,11 +485,11 @@ function removeFromCartByIndex(index) {
     displayCart();
 }
 
-// Update cart summary - REMOVED SHIPPING FEE
+// Update cart summary
 function updateCartSummary() {
     loadCart();
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const shipping = 0; // No shipping fee
+    const shipping = 0;
     const total = subtotal + shipping;
     
     const subtotalEl = document.getElementById('subtotal');
@@ -538,11 +526,11 @@ function displayCheckoutSummary() {
     updateCheckoutSummary();
 }
 
-// Update checkout summary - REMOVED SHIPPING FEE
+// Update checkout summary
 function updateCheckoutSummary() {
     loadCart();
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const shipping = 0; // No shipping fee
+    const shipping = 0;
     const total = subtotal + shipping;
     
     const subtotalEl = document.getElementById('checkout-subtotal');
@@ -554,24 +542,170 @@ function updateCheckoutSummary() {
     if (totalEl) totalEl.textContent = `R${total.toFixed(2)}`;
 }
 
-// Setup checkout form
+// Setup checkout form with Yoco payment integration
 function setupCheckoutForm() {
     const form = document.getElementById('checkout-form');
     if (!form) return;
     
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        // Simulate order processing
-        alert('Order placed successfully! Thank you for your purchase.');
+        // Get form data
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const address = document.getElementById('address').value;
+        const city = document.getElementById('city').value;
+        const zipCode = document.getElementById('zipCode').value;
         
-        // Clear cart
-        cart = [];
-        saveCart();
+        // Load cart
+        loadCart();
         
-        // Redirect to home
-        window.location.href = 'index.html';
+        if (cart.length === 0) {
+            alert('Your cart is empty!');
+            window.location.href = 'cart.html';
+            return;
+        }
+        
+        // Calculate totals
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const total = subtotal;
+        
+        // Prepare line items for Yoco
+        const lineItems = cart.map(item => ({
+            displayName: `${item.name} - ${item.color} (Size ${item.size})`,
+            quantity: item.quantity,
+            pricingDetails: {
+                price: Math.round(item.price * 100) // Convert to cents
+            }
+        }));
+        
+        // Show loading state
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.textContent;
+        submitBtn.textContent = 'Processing...';
+        submitBtn.disabled = true;
+        
+        try {
+            // Get current URL for redirects
+            const baseUrl = window.location.origin;
+            
+            // Create checkout session with Yoco
+            const response = await fetch('/.netlify/functions/create-checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    amount: total,
+                    currency: 'ZAR',
+                    successUrl: `${baseUrl}/success.html`,
+                    cancelUrl: `${baseUrl}/cancel.html`,
+                    customerDetails: {
+                        name: `${firstName} ${lastName}`,
+                        email: email,
+                        phone: phone,
+                        address: `${address}, ${city}, ${zipCode}`
+                    },
+                    lineItems: lineItems
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to create checkout session');
+            }
+            
+            const data = await response.json();
+            
+            // Save checkout ID for verification later
+            sessionStorage.setItem('checkoutId', data.id);
+            
+            // Redirect to Yoco payment page
+            window.location.href = data.redirectUrl;
+            
+        } catch (error) {
+            console.error('Error creating checkout:', error);
+            alert('There was an error processing your order. Please try again.');
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
+        }
     });
+}
+
+// Verify payment and display success
+async function verifyPaymentAndDisplaySuccess() {
+    const successContent = document.getElementById('success-content');
+    if (!successContent) return;
+    
+    const checkoutId = sessionStorage.getItem('checkoutId');
+    
+    if (!checkoutId) {
+        successContent.innerHTML = `
+            <div class="success-icon">⚠️</div>
+            <h1>No Payment Found</h1>
+            <p>We couldn't find your payment information.</p>
+            <a href="index.html" class="btn-primary">Return to Home</a>
+        `;
+        return;
+    }
+    
+    try {
+        // Verify payment with backend
+        const response = await fetch(`/.netlify/functions/verify-payment?checkoutId=${checkoutId}`);
+        
+        if (!response.ok) {
+            throw new Error('Failed to verify payment');
+        }
+        
+        const data = await response.json();
+        
+        if (data.status === 'successful') {
+            // Payment successful - clear cart
+            loadCart();
+            const orderItems = cart.map(item => 
+                `${item.name} - Size: ${item.size}, Color: ${item.color}, Qty: ${item.quantity}`
+            ).join('<br>');
+            
+            cart = [];
+            saveCart();
+            sessionStorage.removeItem('checkoutId');
+            
+            successContent.innerHTML = `
+                <div class="success-icon">✓</div>
+                <h1>Payment Successful!</h1>
+                <p>Thank you for your purchase. Your order has been confirmed.</p>
+                <div class="order-details">
+                    <h3>Order Details</h3>
+                    <div class="detail-row">
+                        <span>Order ID:</span>
+                        <strong>${data.id}</strong>
+                    </div>
+                    <div class="detail-row">
+                        <span>Amount Paid:</span>
+                        <strong>R${(data.totalAmount / 100).toFixed(2)}</strong>
+                    </div>
+                    <div class="detail-row">
+                        <span>Payment Method:</span>
+                        <strong>Card</strong>
+                    </div>
+                </div>
+                <p>A confirmation email will be sent to you shortly.</p>
+                <a href="index.html" class="btn-primary">Continue Shopping</a>
+            `;
+        } else {
+            throw new Error('Payment not successful');
+        }
+        
+    } catch (error) {
+        console.error('Error verifying payment:', error);
+        successContent.innerHTML = `
+            <div class="success-icon" style="color: #f44336;">⚠️</div>
+            <h1>Payment Verification Failed</h1>
+            <p>We couldn't verify your payment. Please contact support.</p>
+            <a href="index.html" class="btn-primary">Return to Home</a>
+        `;
+    }
 }
 
 // Show notification
