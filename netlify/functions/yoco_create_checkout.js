@@ -10,9 +10,26 @@ exports.handler = async (event, context) => {
     };
   }
 
+  // Check if API key is present
+  if (!process.env.YOCO_SECRET_KEY) {
+    console.error('YOCO_SECRET_KEY environment variable is not set');
+    return {
+      statusCode: 500,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify({ 
+        error: 'Server configuration error: API key not set. Please contact support.' 
+      })
+    };
+  }
+
   try {
     const data = JSON.parse(event.body);
     const { amount, currency, successUrl, cancelUrl, customerDetails, lineItems } = data;
+    
+    console.log('Creating checkout with amount:', amount, 'currency:', currency);
 
     // Prepare Yoco checkout payload
     const checkoutData = JSON.stringify({
@@ -70,14 +87,20 @@ exports.handler = async (event, context) => {
     };
 
   } catch (error) {
-    console.error('Error creating checkout:', error);
+    console.error('Detailed error creating checkout:', error);
+    console.error('Error message:', error.message);
+    console.error('Error stack:', error.stack);
+    
     return {
       statusCode: 500,
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
       },
-      body: JSON.stringify({ error: error.message })
+      body: JSON.stringify({ 
+        error: error.message || 'Failed to create checkout session',
+        details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      })
     };
   }
 };
