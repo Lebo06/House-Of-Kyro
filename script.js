@@ -17,6 +17,22 @@ const products = [
         }
     },
     {
+        id: 1,
+        name: "Nike Airforce",
+        category: "Nike",
+        price: 2000.00,
+        salePrice: 1.00,
+        onSale: true,
+        colors: ["Black", "White", "Grey"],
+        sizes: ["3", "4", "5", "6", "7", "8", "9", "10"],
+        images: ["images/nike air force.jpg"],
+        colorImages: {
+            "Black": "images/nike air force.jpg",
+            "White": "images/nike-airforce-white.jpg",
+            "Grey": "images/nike-airforce-grey.jpg"
+        }
+    },
+    {
         id: 2,
         name: "New Balance 530",
         category: "New-Balance",
