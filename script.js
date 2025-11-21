@@ -17,7 +17,7 @@ const products = [
         }
     },
     {
-        id: 1,
+        id: 99,
         name: "Nike Airforce",
         category: "Nike",
         price: 2000.00,
