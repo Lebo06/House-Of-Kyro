@@ -66,9 +66,11 @@ exports.handler = async (event, context) => {
         res.on('end', () => {
           if (res.statusCode === 201) {
             resolve(JSON.parse(body));
-          } else {
-            reject(new Error(`Yoco API error: ${res.statusCode} - ${body}`));
-          }
+          } // ✅ Correct
+if (response.statusCode >= 400) {
+  throw new Error(`Yoco API error: ${statusCode} - ${body}`);
+}
+          
         });
       });
 
