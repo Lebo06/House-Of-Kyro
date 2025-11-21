@@ -21,7 +21,7 @@ const products = [
         name: "Nike Airforce",
         category: "Nike",
         price: 2000.00,
-        salePrice: 1.00,
+        salePrice: 2.50,
         onSale: true,
         colors: ["Black", "White", "Grey"],
         sizes: ["3", "4", "5", "6", "7", "8", "9", "10"],
