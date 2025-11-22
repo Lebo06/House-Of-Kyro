@@ -17,22 +17,6 @@ const products = [
         }
     },
     {
-        id: 99,
-        name: "Nike Airforce",
-        category: "Nike",
-        price: 2000.00,
-        salePrice: 2.50,
-        onSale: true,
-        colors: ["Black", "White", "Grey"],
-        sizes: ["3", "4", "5", "6", "7", "8", "9", "10"],
-        images: ["images/nike air force.jpg"],
-        colorImages: {
-            "Black": "images/nike air force.jpg",
-            "White": "images/nike-airforce-white.jpg",
-            "Grey": "images/nike-airforce-grey.jpg"
-        }
-    },
-    {
         id: 2,
         name: "New Balance 530",
         category: "New-Balance",
@@ -680,7 +664,7 @@ async function verifyPaymentAndDisplaySuccess() {
         console.log('Payment status:', data.status);
         
         // Yoco might return different status values, check for multiple
-        if (data.status === 'successful' || data.status === 'complete' || data.status === 'paid') {
+        if (data.status === 'successful' || data.status === 'complete' || data.status === 'completed' || data.status === 'paid') {
             // Payment successful - prepare order details
             loadCart();
             const orderItemsHtml = cart.map(item => 
@@ -735,7 +719,7 @@ async function verifyPaymentAndDisplaySuccess() {
                     <h3>Order Details</h3>
                     <div class="detail-row">
                         <span>Order ID:</span>
-                        <strong>${data.id}</strong>
+                        <strong>${data.id.substring(0, 8).toUpperCase()}</strong>
                     </div>
                     <div class="detail-row">
                         <span>Amount Paid:</span>
@@ -746,7 +730,7 @@ async function verifyPaymentAndDisplaySuccess() {
                         <strong>Card</strong>
                     </div>
                 </div>
-                <p>A confirmation email will be sent to you shortly.</p>
+                <p>A confirmation email has been sent to the store. We'll process your order shortly!</p>
                 <a href="index.html" class="btn-primary">Continue Shopping</a>
             `;
         } else {
