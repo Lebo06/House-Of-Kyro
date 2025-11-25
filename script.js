@@ -99,7 +99,7 @@ const products = [
         id: 8,
         name: "Air Jordan 1",
         category: "Air-Jordan",
-        price: 899.00,
+        price: 1350.00,
         onSale: false,
         emoji: "👟",
         colors: ["Black", "White", "Pink"],
@@ -108,6 +108,129 @@ const products = [
     },
     {
         id: 9,
+        name: "Air Jordan 4",
+        category: "Air-Jordan",
+        price: 1550.00,
+        emoji: "👞",
+        colors: ["Wet Cement", "White Thunder"],
+        sizes: ["3", "4", "5", "6", "7", "8", "9", "10"],
+        images: ["images/wetCement.jpg"],
+        colorImages: {
+            "Wet Cement": "images/wetCement.jpg",
+            "White Thunder": "images/whiteThunder.jpg"
+        }
+    },
+    {
+        id: 10,
+        name: "Adidas Megaride",
+        category: "Adidas",
+        price: 2500.00,
+        salePrice: 1600.00,
+        onSale: true,
+        colors: ["Black", "White", "Grey"],
+        sizes: ["3", "4", "5", "6", "7", "8", "9", "10"],
+        images: ["images/adidas.jpg"],
+        colorImages: {
+            "Black": "images/nike air force.jpg",
+            "White": "images/nike-airforce-white.jpg",
+            "Grey": "images/nike-airforce-grey.jpg"
+        }
+    },
+    {
+        id: 11,
+        name: "Jordan 4 Retro SB",
+        category: "Air Jordan",
+        price: 2300.00,
+        salePrice: 1500.00,
+        onSale: true,
+        emoji: "👞",
+        colors: ["Pine Green", "White", "Navy"],
+        sizes: ["3", "4", "5", "6", "7", "8", "9", "10"],
+        images: ["images/sb pine green.jpg"],
+        colorImages: {
+            "Black": "images/nb 530.jpg",
+            "White": "images/nb-530-white.jpg",
+            "Navy": "images/nb-530-navy.jpg"
+        }
+    },
+    {
+        id: 12,
+        name: "Nike Air Max TL 2.5",
+        category: "Nike",
+        price: 2250.00,
+        salePrice: 1500.00,
+        onSale: true,
+        emoji: "🏀",
+        sizes: ["3", "4", "5", "6", "7", "8", "9", "10"],
+        images: ["images/tl.jpg"],
+        
+        
+    },
+    {
+        id: 13,
+        name: "New Balance 550",
+        category: "New-Balance",
+        price: 1899.00,
+        onSale: false,
+        emoji: "🏃",
+        sizes: ["3", "4", "5", "6", "7", "8", "9", "10"],
+        images: ["images/nb550.jpg"]
+    },
+    {
+        id: 14,
+        name: "Adidas Campus",
+        category: "Adidas",
+        price: 2300.00,
+        salePrice: 1600.00,
+        onSale: true,
+        emoji: "👞",
+        colors: ["Grey Three", "Green"],
+        sizes: ["3", "4", "5", "6", "7", "8", "9", "10"],
+        images: ["images/campus1.jpg"],
+        colorImages: {
+            "Grey Three": "images/campus1.jpg",
+            "Green": "images/campus2.jpg"
+        }
+    },
+    {
+        id: 15,
+        name: "Puma Suede XL",
+        category: "Puma",
+        price: 1500.00,
+        emoji: "👞",
+        colors: ["Red", "Black"],
+        sizes: ["3", "4", "5", "6", "7", "8", "9", "10"],
+        images: ["images/xl1.jpg"],
+        colorImages: {
+            "Red": "images/xl1.jpg",
+            "Black": "images/xl2.jpg"
+        }
+    },
+    {
+        id: 16,
+        name: "Adidas Samba",
+        category: "Adidas",
+        price: 2300.00,
+        salePrice: 1600.00,
+        onSale: true,
+        emoji: "🏃‍♂️",
+        colors: ["Black", "White", "Grey"],
+        sizes: ["3", "4", "5", "6", "7", "8", "9", "10"],
+        images: ["images/samba.jpg"]
+    },
+    {
+        id: 17,
+        name: "Air Jordan 1",
+        category: "Air-Jordan",
+        price: 899.00,
+        onSale: false,
+        emoji: "👟",
+        colors: ["Black", "White", "Pink"],
+        sizes: ["3", "4", "5", "6", "7", "8", "9", "10"],
+        images: ["images/jordan1.jpg"]
+    },
+    {
+        id: 18,
         name: "Air Jordan 4 [White Thunder]",
         category: "Air-Jordan",
         price: 2000.00,

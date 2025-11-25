@@ -55,10 +55,15 @@ body {
     gap: 0.5rem;
 }
 
-.logo-icon {
-    font-size: 2rem;
-    display: inline-flex;
-    align-items: center;
+.logo-image {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    display: inline-block;
+}
+
+.logo-text {
+    display: inline-block;
 }
 
 .nav-links {
