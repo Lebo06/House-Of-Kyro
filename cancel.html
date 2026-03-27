@@ -4,79 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Cancelled - House of Kryo</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        .cancel-container {
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4rem 0;
-        }
-        .cancel-card {
-            background: var(--secondary);
-            border: 2px solid var(--primary);
-            padding: 3rem;
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .cancel-icon {
-            font-size: 5rem;
-            color: #f44336;
-            margin-bottom: 1rem;
-        }
-        .cancel-card h1 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        .cancel-card p {
-            color: var(--mid-grey);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-        .button-group {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-    </style>
+    <link rel="stylesheet" href="styles-enhanced.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="container">
-            <div class="logo">House of Kyro</div>
+            <a href="index.html" class="logo">
+                <img src="images/logo.jpg" alt="House of Kyro" class="logo-image">
+                <span class="logo-text">House of Kyro</span>
+            </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="products.html">Products</a></li>
                 <li><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></li>
+                <li>
+                    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode">
+                        <span id="theme-icon">🌙</span>
+                    </button>
+                </li>
             </ul>
         </div>
     </nav>
 
-    <section class="cancel-container">
+    <!-- Cancel Section -->
+    <section class="checkout-section" style="min-height: 70vh; display: flex; align-items: center;">
         <div class="container">
-            <div class="cancel-card">
-                <div class="cancel-icon">✖</div>
-                <h1>Payment Cancelled</h1>
-                <p>Your payment was cancelled. No charges have been made to your account.</p>
-                <p>Your items are still in your cart if you'd like to try again.</p>
-                <div class="button-group">
-                    <a href="cart.html" class="btn-primary">Return to Cart</a>
-                    <a href="products.html" class="btn-secondary">Continue Shopping</a>
+            <div class="text-center" style="max-width: 600px; margin: 0 auto;">
+                <div style="width: 100px; height: 100px; background: var(--warning); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; font-size: 3rem; color: white; animation: scaleIn 0.5s ease;">!</div>
+                <h1 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary);">Payment Cancelled</h1>
+                <p style="color: var(--mid-grey); margin-bottom: 2rem; font-size: 1.1rem;">Your payment was cancelled. Don't worry - your cart items are still saved.</p>
+                <div style="background: var(--light-grey); padding: 2rem; border-radius: 16px; margin-bottom: 2rem;">
+                    <p style="color: var(--mid-grey);">You can try again or continue shopping.</p>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="checkout.html" class="btn-primary">Try Again</a>
+                    <a href="cart.html" class="btn-secondary" style="color: var(--primary); border-color: var(--primary);">Back to Cart</a>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 House of Kryo. All rights reserved.</p>
+            <div class="footer-bottom">
+                <p>&copy; 2025 House of Kryo. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <style>
+        @keyframes scaleIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+
+    <script src="script-enhanced.js"></script>
     <script>
         updateCartCount();
     </script>

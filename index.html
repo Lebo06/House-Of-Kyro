@@ -4,60 +4,187 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>House of Kryo - Premium Sneakers</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-enhanced.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Promo Banner -->
+    <div class="promo-banner">
+        <div class="promo-banner-content">
+            <span>🔥 FLASH SALE: Up to 50% Off Selected Items!</span>
+            <div class="countdown-timer" id="countdown-timer">
+                <span class="countdown-item">23</span>:
+                <span class="countdown-item">59</span>:
+                <span class="countdown-item">59</span>
+            </div>
+        </div>
+        <button class="promo-banner-close">×</button>
+    </div>
+
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="container">
-            <div class="logo">
+            <a href="index.html" class="logo">
                 <img src="images/logo.jpg" alt="House of Kyro" class="logo-image">
                 <span class="logo-text">House of Kyro</span>
+            </a>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <input type="text" class="search-input" id="search-input" placeholder="Search products...">
+                    <button class="search-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="search-results" id="search-results"></div>
             </div>
+
+            <button class="mobile-menu-toggle">☰</button>
+
             <ul class="nav-links">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="products.html">Products</a></li>
-                <li><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></li>
+                <li class="cart-icon-wrapper">
+                    <a href="cart.html">
+                        Cart
+                        <span id="cart-count">0</span>
+                    </a>
+                </li>
+                <li>
+                    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode">
+                        <span id="theme-icon">🌙</span>
+                    </button>
+                </li>
             </ul>
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Step Into Excellence</h1>
-            <p>Discover the latest collection of premium sneakers</p>
-            <a href="products.html" class="btn-primary">Shop Now</a>
+            <h1 class="reveal">Step Into Excellence</h1>
+            <p class="reveal stagger-1">Discover the latest collection of premium sneakers</p>
+            <div class="hero-buttons reveal stagger-2">
+                <a href="products.html" class="btn-primary">Shop Now</a>
+                <a href="#sales" class="btn-secondary">View Deals</a>
+            </div>
         </div>
     </section>
 
-    <section class="sales-section">
-        <div class="container">
-            <h2 class="section-title">🔥 Hot Deals</h2>
-            <div class="sales-grid" id="sales-grid"></div>
-        </div>
-    </section>
-
+    <!-- Features Section -->
     <section class="features">
         <div class="container">
             <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">✔</div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">✓</div>
                     <h3>Authentic</h3>
-                    <p>100% genuine products</p>
+                    <p>100% genuine products guaranteed</p>
+                </div>
+                <div class="feature-card reveal stagger-1">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Free Shipping</h3>
+                    <p>On orders over R2000</p>
+                </div>
+                <div class="feature-card reveal stagger-2">
+                    <div class="feature-icon">↩</div>
+                    <h3>Easy Exchanges</h3>
+                    <p>30-day exchange policy</p>
+                </div>
+                <div class="feature-card reveal stagger-3">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure Payment</h3>
+                    <p>Safe & encrypted checkout</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Sales Section -->
+    <section class="sales-section" id="sales">
+        <div class="container">
+            <h2 class="section-title reveal">🔥 Hot Deals</h2>
+            <div class="sales-grid" id="sales-grid">
+                <!-- Products loaded by JS -->
+            </div>
+            <div class="text-center mt-4 reveal">
+                <a href="products.html" class="btn-primary">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content reveal">
+                <h2>Join Our Newsletter</h2>
+                <p>Get exclusive offers, new arrivals, and style tips delivered to your inbox</p>
+                <form class="newsletter-form" id="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                    <button type="submit" class="btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 House of Kryo. All rights reserved.</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <p style="color: var(--mid-grey); line-height: 1.6;">House of Kryo is your premier destination for authentic sneakers. We bring you the latest releases from top brands.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="Facebook">f</a>
+                        <a href="#" class="social-link" title="Instagram">📷</a>
+                        <a href="#" class="social-link" title="Twitter">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Exchanges</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>📧 info@houseofkyro.com</li>
+                        <li>📞 +27 12 345 6789</li>
+                        <li>📍 Johannesburg, South Africa</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 House of Kryo. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Back to Top Button -->
+    <button class="back-to-top" title="Back to Top">↑</button>
+
+    <script src="script-enhanced.js"></script>
     <script>
         displaySalesProducts();
         updateCartCount();
+        setupNewsletter();
     </script>
 </body>
 </html>
